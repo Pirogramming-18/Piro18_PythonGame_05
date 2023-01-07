@@ -1,1 +1,2 @@
 Piro18_PythonGame_05
+05-Seoyeong
