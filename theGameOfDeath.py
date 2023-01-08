@@ -10,11 +10,14 @@ def theGameOfDeath(players, starter):
         pick[player] = input(f'{player}님의 지목할 상대는?: ')
 
     pointer = starter
+
+    print('신난다~ 재미난다~ 더 게임 오브 데스!')
     for i in range(n):
         target = pick[pointer]
         print(f'{i+1}: {pointer} -> {target}')
         pointer = target
     print('걸린 사람: ', target)
+    return target
 
 
 theGameOfDeath(players, starter)
