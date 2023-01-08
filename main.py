@@ -1,7 +1,5 @@
 import random
 import sys
-from theGameOfDeath import theGameOfDeath
-
 # 게임에 참여하는 유저 클래스
 
 
@@ -29,7 +27,7 @@ def game_start(game_starter):
     curr_game_index = int(
         input(f'{game_starter}(이)가 좋아하는 랜덤 게임~ 랜덤 게임~ 무슨 게임~? : '))
     if curr_game_index == 1:
-        theGameOfDeath(users, game_starter)
+        pass
 
 
 while True:
@@ -51,13 +49,37 @@ while True:
         print('4. 소주 한병 반에서 두병 (8잔)')
         print('5. 소주 두병 이상 (10잔)')
 
-        user_tolerance = tolerance[int(input(
-            '당신의 주량은 얼마만큼인가요? (1~5중 하나를 선택해주세요) : '))]
+        while True:
+            try:
+                num_input = int(input('당신의 주량은 얼마만큼인가요? (1~5중 하나를 선택해주세요) : '))
+                if not(isinstance(num_input, int)):
+                    raise TypeError('정수를 입력해주세요')
+                if not(1 <= num_input <= 5):
+                    raise ValueError('정수 범위 확인!!!')
+                else:
+                    break
+            except TypeError as e:
+                print(e)
+            except ValueError as e:
+                print(e)
+        user_tolerance = tolerance[num_input]
 
         # 사용자와 주량 users에 추가
         users.append(User(user_name, user_tolerance))
-
-        fnumber = int(input('함께 취할 친구들은 얼마나 필요하신가요? (3명까지 초대할 수 있어요!) : '))
+        while True:
+            try:
+                fnumber = int(
+                    input('함께 취할 친구들은 얼마나 필요하신가요? (3명까지 초대할 수 있어요!) : '))
+                if not(isinstance(fnumber, int)):
+                    raise TypeError('정수를 입력해주세요')
+                if not(1 <= fnumber <= 3):
+                    raise ValueError('정수 범위 확인!!!')
+                else:
+                    break
+            except TypeError as e:
+                print(e)
+            except ValueError as e:
+                print(e)
 
         # 친구와 주량 생성 후 users에 추가
         rlist = [0]  # 유저 중복 방지를 위한 리스트
