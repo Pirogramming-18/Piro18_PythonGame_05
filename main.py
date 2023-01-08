@@ -3,6 +3,35 @@ import sys
 # 게임에 참여하는 유저 클래스
 
 
+def game01(players, starter):
+    print('''
+    ■■■■■■■□■□□□□□■□□■■■■■■□□□□□□□■■■■■■□□□□■■□□□□■■□□□□□■■□□■■■■■■□□□□□□□■■■■■■□□■■■■■■□□□□□■■■■■■□□□■■■■■■□□□□■■□□□■■■■■■■□■□□□□□■
+    □□□■□□□□■□□□□□■□□■□□□□□□□□□□□■■■□□■■□□□□■■■□□□■■□□□□□■■□□■□□□□□□□□□□□■■■□□■■■□■□□□□□□□□□□■□□□■■■□□■□□□□□□□□□■■■□□□□□■□□□□■□□□□□■
+    □□□■□□□□■□□□□□■□□■□□□□□□□□□□□■■□□□□□□□□■■■■□□□■■■□□□■■■□□■□□□□□□□□□□□■■□□□□■■□■□□□□□□□□□□■□□□□■■□□■□□□□□□□□■■■■□□□□□■□□□□■□□□□□■
+    □□□■□□□□■■■■■■■□□■□□□□□□□□□□□■□□□□□□□□□■□□■□□□■■■□□□■■■□□■□□□□□□□□□□□■□□□□□□■□■□□□□□□□□□□■□□□□□■□□■□□□□□□□□■□□■□□□□□■□□□□■■■■■■■
+    □□□■□□□□■□□□□□■□□■■■■■■□□□□□□■□□■■■■□□■■□□■■□□■□■■□■■□■□□■■■■■■□□□□□□■□□□□□□■□■■■■■■□□□□□■□□□□□■□□■■■■■■□□■■□□■■□□□□■□□□□■□□□□□■
+    □□□■□□□□■□□□□□■□□■□□□□□□□□□□□■□□□□□■□□■■■■■■□□■□□■□■□□■□□■□□□□□□□□□□□■□□□□□□■□■□□□□□□□□□□■□□□□□■□□■□□□□□□□■■■■■■□□□□■□□□□■□□□□□■
+    □□□■□□□□■□□□□□■□□■□□□□□□□□□□□■■□□□□■□□■□□□□■■□■□□■■■□□■□□■□□□□□□□□□□□■■□□□□■■□■□□□□□□□□□□■□□□□■■□□■□□□□□□□■□□□□■■□□□■□□□□■□□□□□■
+    □□□■□□□□■□□□□□■□□■□□□□□□□□□□□■■■□□□■□■■□□□□■■□■□□□■□□□■□□■□□□□□□□□□□□■■■□□■■■□■□□□□□□□□□□■□□□■■■□□■□□□□□□■■□□□□■■□□□■□□□□■□□□□□■
+    □□□■□□□□■□□□□□■□□■■■■■■□□□□□□□■■■■■■□■■□□□□□■□■□□□□□□□■□□■■■■■■□□□□□□□■■■■■■□□■□□□□□□□□□□■■■■■■□□□■■■■■■□■■□□□□□■□□□■□□□□■□□□□□■
+        ''')
+    n = int(input(f"{starter}님께서 숫자를 하나 정해주세요: "))
+    print("플레이어들은 다른 플레이어 중 한명을 지목하세요!")
+    pick = dict()
+    for player in players:
+        pick[player] = input(f'{player}님의 지목할 상대는?: ')
+
+    pointer = starter
+
+    print('신난다~ 재미난다~ 더 게임 오브 데스!')
+    for i in range(n):
+        target = pick[pointer]
+        print(f'{i+1}: {pointer} -> {target}')
+        pointer = target
+    print('걸린 사람: ', target)
+    return target
+
+
 class User:
     def __init__(self, name, tolerance, glasses=0):  # 이름과 주량, 마신 잔
         self.name = name
@@ -19,14 +48,17 @@ def display_tolerance():
 # 게임을 실행하는 함수
 
 # 게임 참여자들의 이름을 담은 리스트 리턴 함수
-def make_users_name(users, user):
-    users_name = [user]
-    for u in users:
-        users_name.append(u.name)
+
+
+def make_users_name(users):
+    users_name = []
+    for user in users:
+        users_name.append(user.name)
+    print(users_name)
     return users_name
 
 
-def game_start(game_starter, users_name):
+def game_start(game_starter, users_names):
     games = ['더게임오브데스']
     print('오늘의 Alcohol GAME')
     for i, game in enumerate(games):
@@ -34,7 +66,7 @@ def game_start(game_starter, users_name):
     curr_game_index = int(
         input(f'{game_starter}(이)가 좋아하는 랜덤 게임~ 랜덤 게임~ 무슨 게임~? : '))
     if curr_game_index == 1:
-        pass
+        game01(users_names, game_starter)
 
 
 while True:
@@ -104,10 +136,10 @@ while True:
 
         i = 0
         game_starter = user_name
-        users_name = make_users_name(users)
+        users_names = make_users_name(users)
         while True:
             display_tolerance()
-            curr_game_loser = game_start(game_starter, users_name)
+            curr_game_loser = game_start(game_starter, users_names)
             game_starter = curr_game_loser
             for user in users:
                 if curr_game_loser == user.name:
