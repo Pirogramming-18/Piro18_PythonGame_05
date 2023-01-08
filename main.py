@@ -1,6 +1,7 @@
 import random
 import sys
 import requests
+
 # 게임에 참여하는 유저 클래스
 
 # GAMES
@@ -102,6 +103,8 @@ def game02(curr_player, users):
         print("\n")
         order_num += 1
         number += 1
+    
+    return users[order_num].name
 
 # 지하철 술게임
 def game03(players, starter):
@@ -240,7 +243,7 @@ def make_users_name(users):
 
 
 def game_start(game_starter, users_names):
-    games = ['더 게임 오브 데스','369(임시)','지하철 게임','공산당 게임']
+    games = ['더 게임 오브 데스','369 게임','지하철 게임','공산당 게임']
     print('오늘의 Alcohol GAME')
     for i, game in enumerate(games):
         print(f'{i+1}. {game}')
@@ -314,6 +317,7 @@ def crawling():
 
 
 list_subway = crawling()
+
 while True:
     gameStart = input('게임을 진행할까요? (y/n) :')
     if gameStart == 'n':
