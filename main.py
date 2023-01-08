@@ -19,8 +19,13 @@ def game01(players, starter):
     print("플레이어들은 다른 플레이어 중 한명을 지목하세요!")
     pick = dict()
     for player in players:
-        pick[player] = input(f'{player}님의 지목할 상대는?: ')
-
+        while True:
+            targetOfPlayer = input(f'{player}님의 지목할 상대는?: ')
+            if targetOfPlayer not in players:
+                print('게임을 플레이하고 있는 유저 중에서 지목해주세요!')
+            else:
+                pick[player] = targetOfPlayer
+                break
     pointer = starter
 
     print('신난다~ 재미난다~ 더 게임 오브 데스!')
@@ -68,7 +73,6 @@ def game04(players,starter):
 
     #인트로 출력
     print('\n🎶공~산당 공산당 공~산당 공산당!🎶\n')
-    starter='유진' #main전이라 임의로 설정해둠
     #게임 진행
     while True:
         try:
