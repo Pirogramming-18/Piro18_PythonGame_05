@@ -11,11 +11,11 @@ def printLine():
 # 공산당 게임
 class TargetError(Exception):
     def __init__(self):
-        super().__init__('이름이 틀린 것 같소.. 다시 입력하시라요!!')
+        super().__init__('이름이 틀린 것 같소.. 다시 입력하시라요!\n')
 
 class OrderError(Exception):
     def __init__(self):
-        super().__init__('명령은 0과 1뿐.. 다시 입력하시라요!')
+        super().__init__('명령은 0과 1뿐.. 다시 입력하시라요!\n')
 
 def game1(player__list):
 
@@ -38,12 +38,12 @@ def game1(player__list):
     printLine()
 
     #인트로 출력
-    print('🎶공~산당 공산당 공~산당 공산당!🎶')
+    print('\n🎶공~산당 공산당 공~산당 공산당!🎶\n')
     starter='유진' #main전이라 임의로 설정해둠
     #게임 진행
     while True:
         try:
-            gsdTarget=input(f'{starter}님🙌 누구를 지목하시겠습니까?: ')
+            gsdTarget=input(f'\n{starter}님🙌 누구를 지목하시겠습니까?: ')
             if gsdTarget not in player__list:
                 raise TargetError
         except TargetError as e:
@@ -52,7 +52,7 @@ def game1(player__list):
         else:
             while True:
                 try:
-                    gsdOrder=int(input('0: \'동무~😊\' 1: \'마시라우!☠️\' 당신의 선택은?: '))
+                    gsdOrder=int(input('\n0: \'동무~😊\' 1: \'마시라우!☠️\' \n과연.. 당신의 선택은?: '))
 
                     if gsdOrder ==0:
                         starter=player__list[player__list.index(gsdTarget)]
