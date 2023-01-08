@@ -4,6 +4,7 @@ import requests
 # 게임에 참여하는 유저 클래스
 
 # GAMES
+# 더게임오브데스
 def game01(players, starter):
     print('''
     ■■■■■■■□■□□□□□■□□■■■■■■□□□□□□□■■■■■■□□□□■■□□□□■■□□□□□■■□□■■■■■■□□□□□□□■■■■■■□□■■■■■■□□□□□■■■■■■□□□■■■■■■□□□□■■□□□■■■■■■■□■□□□□□■
@@ -36,6 +37,71 @@ def game01(players, starter):
         pointer = target
     print('걸린 사람: ', target)
     return target
+
+# 369 게임
+def game02(curr_player, users):
+    print("""
+ ____    _    __  ____   ___   _ _  ______ _   _    ____    _    __  __ _____ 
+/ ___|  / \  |  \/  \ \ / / | | | |/ / ___| | | |  / ___|  / \  |  \/  | ____|
+\___ \ / _ \ | |\/| |\ V /| | | | ' / |  _| | | | | |  _  / _ \ | |\/| |  _|  
+ ___) / ___ \| |  | | | | | |_| | . \ |_| | |_| | | |_| |/ ___ \| |  | | |___ 
+|____/_/   \_\_|  |_| |_|  \___/|_|\_\____|\___/   \____/_/   \_\_|  |_|_____|\n""")
+    
+    order_num = curr_player
+    number = 1
+    p = [True, True, True, True, False]
+    
+    while True:
+        if order_num >= len(users):
+            order_num = 0
+        
+        if order_num == 0:
+            correct = ""
+            if number//10==3 or number//10==6 or number//10==9:
+                correct += "짝"
+            if number%10==3 or number%10==6 or number%10==9:
+                correct += "짝"
+            if correct == "":
+                correct += str(number)
+            answer = input(users[order_num].name + " 님 : ")
+            if answer != correct:
+                print("땡!")
+                print("당신이 졌습니다. 술이 들어간다 쭉쭉쭉 쭉쭉! 쭉쭉쭉 쭉쭉!\n")
+                users[order_num].glasses += 1
+                break    
+        else:
+        
+            correct = ""
+            print(users[order_num].name, "님 : ", end='')
+            if number//10==3 or number//10==6 or number//10==9:
+                correct += "짝"
+            if number%10==3 or number%10==6 or number%10==9:
+                correct += "짝"
+            if correct == "":
+                correct += str(number)
+
+            answer = ""
+            if number//10==3 or number//10==6 or number//10==9:
+                x = random.randint(0, 4)
+                if p[x]: 
+                    answer += "짝"
+            if number%10==3 or number%10==6 or number%10==9:
+                x = random.randint(0, 4)
+                if p[x]: 
+                    answer += "짝"
+            if answer == "":
+                answer += str(number)
+            print(answer)
+
+            if answer != correct:
+                print("땡!")
+                print(users[order_num].name, "님이 졌습니다. 술이 들어간다 쭉쭉쭉 쭉쭉! 쭉쭉쭉 쭉쭉!\n")
+                users[order_num].glasses += 1
+                break
+
+        print("\n")
+        order_num += 1
+        number += 1
 
 # 지하철 술게임
 def game03(players, starter):
@@ -182,6 +248,8 @@ def game_start(game_starter, users_names):
         input(f'{game_starter}(이)가 좋아하는 랜덤 게임~ 랜덤 게임~ 무슨 게임~? : '))
     if curr_game_index == 1:
         curr_game_loser = game01(users_names, game_starter)
+    elif curr_game_index == 2:
+        curr_game_loser = game02(curr_player, users)
     elif curr_game_index == 3:
         curr_game_loser = game03(users_names, game_starter)
     elif curr_game_index==4:
@@ -312,9 +380,12 @@ while True:
                 f'오늘 함께 취할 친구는 {friends[random_friend_index]}입니다 ! (치사량 : {tolerance[random_tolerance_index]})')
 
         i = 0
+        curr_player = 0
         game_starter = user_name
         users_names = make_users_name(users)
         while True:
+            if curr_player >= len(users):
+                curr_player = 0
             display_tolerance()
             curr_game_loser = game_start(game_starter, users_names)
             game_starter = curr_game_loser
@@ -337,6 +408,7 @@ while True:
                             '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
                         sys.exit(0)
             i += 1
+            curr_player += 1
 
     else:
         print('잘못된 입력입니다.')
