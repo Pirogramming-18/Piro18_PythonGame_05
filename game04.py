@@ -53,7 +53,7 @@ def game04(players,starter):
                     elif gsdOrder==1:
                         loser=players[players.index(gsdTarget)]
                         printEndMsg(loser)
-                        return(loser)
+                        return loser
                     else:
                         raise OrderError
                 except OrderError as e:
