@@ -59,11 +59,13 @@ for i in range(len(new_str)):
 print(list_subway)
 
 def game03():
+    # main에서 크롤링한 데이터 가져오기
     global list_subway
     print('-------------------------------------------------------------------------')
     print('경의선: 0   경춘선: 10   수인분당선: 11   공항철도: 12   신분당선: 13')
     print('-------------------------------------------------------------------------')
     try:
+        # intro
         subway_num = int(input('지하철~ 지하철! 지하철~ 지하철! 몇호선~ 몇호선? : '))
         if subway_num < 0 or subway_num > 13: 
             while True:
@@ -75,15 +77,23 @@ def game03():
         print(e)
     else:
         print(f'아 {subway_num}호선~ {subway_num}호선!')
+        # 반복된 지하철역 있는지 확인하는 리스트
         new_list = []
+        # 몇번 성공적으로 진행됐는지 확인하는 변수
+        count = 0
         while True:
             subway_station_name = input('짝짝! : ')
             if subway_station_name not in list_subway[subway_num] or subway_station_name in new_list:
                 break
             else:
                 new_list.append(subway_station_name)
+                count+=1
         print('지식은 생명! 지식은 생명!')
         print('생명! 생명! 생명생명생명!')
+        # return된 값으로 술마시고 다음 게임을 진행할 사람을 정한다
+        # count가 0이면 같은 사람이 다음 게임 시작
+        # count가 1이면 리스트에 저장된 순서의 다음 사람이 게임 시작
+        return count
 
 game03()
 
