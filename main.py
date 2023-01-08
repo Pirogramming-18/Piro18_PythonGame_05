@@ -18,8 +18,15 @@ def display_tolerance():
 
 # 게임을 실행하는 함수
 
+# 게임 참여자들의 이름을 담은 리스트 리턴 함수
+def make_users_name(users, user):
+    users_name = [user]
+    for u in users:
+        users_name.append(u.name)
+    return users_name
 
-def game_start(game_starter):
+
+def game_start(game_starter, users_name):
     games = ['더게임오브데스']
     print('오늘의 Alcohol GAME')
     for i, game in enumerate(games):
@@ -97,9 +104,10 @@ while True:
 
         i = 0
         game_starter = user_name
+        users_name = make_users_name(users)
         while True:
             display_tolerance()
-            curr_game_loser = game_start(game_starter)
+            curr_game_loser = game_start(game_starter, users_name)
             game_starter = curr_game_loser
             for user in users:
                 if curr_game_loser == user.name:
