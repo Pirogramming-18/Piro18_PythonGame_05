@@ -2,7 +2,7 @@ players = ['유진', '서영', '형준', '혁수']
 starter = '혁수'
 
 
-def theGameOfDeath(players, starter):
+def game01(players, starter):
     print('''
     ■■■■■■■□■□□□□□■□□■■■■■■□□□□□□□■■■■■■□□□□■■□□□□■■□□□□□■■□□■■■■■■□□□□□□□■■■■■■□□■■■■■■□□□□□■■■■■■□□□■■■■■■□□□□■■□□□■■■■■■■□■□□□□□■
     □□□■□□□□■□□□□□■□□■□□□□□□□□□□□■■■□□■■□□□□■■■□□□■■□□□□□■■□□■□□□□□□□□□□□■■■□□■■■□■□□□□□□□□□□■□□□■■■□□■□□□□□□□□□■■■□□□□□■□□□□■□□□□□■
@@ -31,4 +31,4 @@ def theGameOfDeath(players, starter):
     return target
 
 
-theGameOfDeath(players, starter)
+game01(players, starter)
