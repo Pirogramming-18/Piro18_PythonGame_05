@@ -66,7 +66,8 @@ def game_start(game_starter, users_names):
     curr_game_index = int(
         input(f'{game_starter}(이)가 좋아하는 랜덤 게임~ 랜덤 게임~ 무슨 게임~? : '))
     if curr_game_index == 1:
-        game01(users_names, game_starter)
+        curr_game_loser = game01(users_names, game_starter)
+    return curr_game_loser
 
 
 while True:
