@@ -45,36 +45,55 @@ data = '{"pageNo":"1","pageSize":"10","browser1":"chrome","version":"108","dummy
 
 response = requests.post('https://data.seoul.go.kr/dataList/dataView.do', params=params, cookies=cookies, headers=headers, data=data)
 new_str = response.text[87:-6]
-# new = json.loads(new_str)
 new_str = new_str.split(',')
-line_list = [[] for i in range(14)]
+list_subway = [[] for i in range(14)]
 list_line = ['경의선', '01호선', '02호선', '03호선', '04호선', '05호선', '06호선', '07호선', '08호선', '09호선', '경춘선', '수인분당선', '공항철도', '신분당선']
+
+# 크롤링 데이터를 list_subway에 저장하기
 for i in range(len(new_str)):
     if new_str[i][:10] == 'STATION_NM':
         line = new_str[i-4][11:-1]
         if line in list_line:
             index_of_line = list_line.index(line)
-            line_list[index_of_line].append(new_str[i][12:-1])
-print(line_list)
+            list_subway[index_of_line].append(new_str[i][12:-1])
+print(list_subway)
 
-
-
-def subway():
-    global line_list
+def game03():
+    # main에서 크롤링한 데이터 가져오기
+    global list_subway
     print('-------------------------------------------------------------------------')
     print('경의선: 0   경춘선: 10   수인분당선: 11   공항철도: 12   신분당선: 13')
     print('-------------------------------------------------------------------------')
-    subway_num = int(input('지하철~ 지하철! 지하철~ 지하철! 몇호선~ 몇호선? : '))
-    print(f'아 {subway_num}호선~ {subway_num}호선!')
-    new_list = []
-    while True:
-        subway_station_name = input('짝짝! : ')
-        if subway_station_name not in line_list[subway_num] or subway_station_name in new_list:
-            break
-        else:
-            new_list.append(subway_station_name)
-    print('지식은 생명! 지식은 생명!')
-    print('생명! 생명! 생명생명생명!')
+    try:
+        # intro
+        subway_num = int(input('지하철~ 지하철! 지하철~ 지하철! 몇호선~ 몇호선? : '))
+        if subway_num < 0 or subway_num > 13: 
+            while True:
+                print('0 ~ 13 사이의 숫자만 입력해주세요!!')
+                subway_num = int(input('지하철~ 지하철! 지하철~ 지하철! 몇호선~ 몇호선? : '))
+                if 0 <= subway_num <= 13:
+                    break
+    except Exception as e:
+        print(e)
+    else:
+        print(f'아 {subway_num}호선~ {subway_num}호선!')
+        # 반복된 지하철역 있는지 확인하는 리스트
+        new_list = []
+        # 몇번 성공적으로 진행됐는지 확인하는 변수
+        count = 0
+        while True:
+            subway_station_name = input('짝짝! : ')
+            if subway_station_name not in list_subway[subway_num] or subway_station_name in new_list:
+                break
+            else:
+                new_list.append(subway_station_name)
+                count+=1
+        print('지식은 생명! 지식은 생명!')
+        print('생명! 생명! 생명생명생명!')
+        # return된 값으로 술마시고 다음 게임을 진행할 사람을 정한다
+        # count가 0이면 같은 사람이 다음 게임 시작
+        # count가 1이면 리스트에 저장된 순서의 다음 사람이 게임 시작
+        return count
 
-subway()
+game03()
 
