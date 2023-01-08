@@ -1,5 +1,6 @@
 import random
 import sys
+import requests
 # 게임에 참여하는 유저 클래스
 
 # GAMES
