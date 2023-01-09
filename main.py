@@ -141,13 +141,18 @@ def game03(players, starter):
         new_list = []
         # 몇번 성공적으로 진행됐는지 확인하는 변수
         count = 0
+        index_of_name = players.index(starter)
         while True:
-            subway_station_name = input('짝짝! : ')
+            subway_station_name = input(f'{players[index_of_name]} : ')
             if subway_station_name not in list_subway[subway_num] or subway_station_name in new_list:
                 break
             else:
                 new_list.append(subway_station_name)
                 count += 1
+            if index_of_name == len(players) - 1:
+                index_of_name = 0
+            else:
+                index_of_name+=1
         index_starter = players.index(starter)
         count = count + index_starter
         count = count % len(players)
