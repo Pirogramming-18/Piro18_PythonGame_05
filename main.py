@@ -5,7 +5,8 @@ import requests
 # 게임에 참여하는 유저 클래스
 
 # GAMES
-# 더게임오브데스
+
+
 def game01(players, starter):
     print('''
     ■■■■■■■□■□□□□□■□□■■■■■■□□□□□□□■■■■■■□□□□■■□□□□■■□□□□□■■□□■■■■■■□□□□□□□■■■■■■□□■■■■■■□□□□□■■■■■■□□□■■■■■■□□□□■■□□□■■■■■■■□■□□□□□■
@@ -40,6 +41,8 @@ def game01(players, starter):
     return target
 
 # 369 게임
+
+
 def game02(curr_player, users):
     print("""
  ____    _    __  ____   ___   _ _  ______ _   _    ____    _    __  __ _____ 
@@ -47,20 +50,20 @@ def game02(curr_player, users):
 \___ \ / _ \ | |\/| |\ V /| | | | ' / |  _| | | | | |  _  / _ \ | |\/| |  _|  
  ___) / ___ \| |  | | | | | |_| | . \ |_| | |_| | | |_| |/ ___ \| |  | | |___ 
 |____/_/   \_\_|  |_| |_|  \___/|_|\_\____|\___/   \____/_/   \_\_|  |_|_____|\n""")
-    
+
     order_num = curr_player
     number = 1
     p = [True, True, True, True, False]
-    
+
     while True:
         if order_num >= len(users):
             order_num = 0
-        
+
         if order_num == 0:
             correct = ""
-            if number//10==3 or number//10==6 or number//10==9:
+            if number//10 == 3 or number//10 == 6 or number//10 == 9:
                 correct += "짝"
-            if number%10==3 or number%10==6 or number%10==9:
+            if number % 10 == 3 or number % 10 == 6 or number % 10 == 9:
                 correct += "짝"
             if correct == "":
                 correct += str(number)
@@ -69,26 +72,26 @@ def game02(curr_player, users):
                 print("땡!")
                 print("당신이 졌습니다. 술이 들어간다 쭉쭉쭉 쭉쭉! 쭉쭉쭉 쭉쭉!\n")
                 users[order_num].glasses += 1
-                break    
+                break
         else:
-        
+
             correct = ""
             print(users[order_num].name, "님 : ", end='')
-            if number//10==3 or number//10==6 or number//10==9:
+            if number//10 == 3 or number//10 == 6 or number//10 == 9:
                 correct += "짝"
-            if number%10==3 or number%10==6 or number%10==9:
+            if number % 10 == 3 or number % 10 == 6 or number % 10 == 9:
                 correct += "짝"
             if correct == "":
                 correct += str(number)
 
             answer = ""
-            if number//10==3 or number//10==6 or number//10==9:
+            if number//10 == 3 or number//10 == 6 or number//10 == 9:
                 x = random.randint(0, 4)
-                if p[x]: 
+                if p[x]:
                     answer += "짝"
-            if number%10==3 or number%10==6 or number%10==9:
+            if number % 10 == 3 or number % 10 == 6 or number % 10 == 9:
                 x = random.randint(0, 4)
-                if p[x]: 
+                if p[x]:
                     answer += "짝"
             if answer == "":
                 answer += str(number)
@@ -96,17 +99,20 @@ def game02(curr_player, users):
 
             if answer != correct:
                 print("땡!")
-                print(users[order_num].name, "님이 졌습니다. 술이 들어간다 쭉쭉쭉 쭉쭉! 쭉쭉쭉 쭉쭉!\n")
+                print(users[order_num].name,
+                      "님이 졌습니다. 술이 들어간다 쭉쭉쭉 쭉쭉! 쭉쭉쭉 쭉쭉!\n")
                 users[order_num].glasses += 1
                 break
 
         print("\n")
         order_num += 1
         number += 1
-    
+
     return users[order_num].name
 
 # 지하철 술게임
+
+
 def game03(players, starter):
     # main에서 크롤링한 데이터 가져오기
     global list_subway
@@ -123,8 +129,9 @@ def game03(players, starter):
     print('-------------------------------------------------------------------------')
     try:
         # intro
-        subway_num = int(input('지하철~ 지하철! 지하철~ 지하철! 몇호선~ 몇호선? (0~13) 숫자를 입력해주세요 : '))
-        if subway_num < 0 or subway_num > 13: 
+        subway_num = int(
+            input('지하철~ 지하철! 지하철~ 지하철! 몇호선~ 몇호선? (0~13) 숫자를 입력해주세요 : '))
+        if subway_num < 0 or subway_num > 13:
             while True:
                 print('0 ~ 13 사이의 숫자만 입력해주세요!!')
                 subway_num = int(input('지하철~ 지하철! 지하철~ 지하철! 몇호선~ 몇호선? : '))
@@ -144,7 +151,7 @@ def game03(players, starter):
                 break
             else:
                 new_list.append(subway_station_name)
-                count+=1
+                count += 1
         index_starter = players.index(starter)
         count = count + index_starter
         count = count % len(players)
@@ -156,23 +163,29 @@ def game03(players, starter):
 
 # 공산당 게임
 
-############# 추가로 작성한 Class 및 함수입니다
+# 추가로 작성한 Class 및 함수입니다
+
+
 class TargetError(Exception):
     def __init__(self):
         super().__init__('이름이 틀린 것 같소.. 다시 입력하시라요!\n')
+
 
 class OrderError(Exception):
     def __init__(self):
         super().__init__('명령은 0과 1뿐.. 다시 입력하시라요!\n')
 
+
 def printEndMsg(loser):
-    print(f'\n누가 술을 마셔~ {loser}(이)가 술을 마셔🍺 \n{loser[0]}👏👏 👏👏 {loser[1]}👏👏 👏👏 원~~샷!\n')
+    print(
+        f'\n누가 술을 마셔~ {loser}(이)가 술을 마셔🍺 \n{loser[0]}👏👏 👏👏 {loser[1]}👏👏 👏👏 원~~샷!\n')
 #############
 
-def game04(players,starter):
+
+def game04(players, starter):
 
     # 게임 시작 ascii art 출력
-    #printLine()
+    # printLine()
     print("""
 ░██████╗░░█████╗░███╗░░██╗░██████╗░░██████╗░█████╗░███╗░░██╗
 ██╔════╝░██╔══██╗████╗░██║██╔════╝░██╔════╝██╔══██╗████╗░██║
@@ -186,14 +199,14 @@ def game04(players,starter):
 ██║░░██║██╔══██║██║╚████║██║░░╚██╗╚════╝██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░
 ██████╔╝██║░░██║██║░╚███║╚██████╔╝░░░░░░╚██████╔╝██║░░██║██║░╚═╝░██║███████╗
 ╚═════╝░╚═╝░░╚═╝╚═╝░░╚══╝░╚═════╝░░░░░░░░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝""")
-    #printLine()
+    # printLine()
 
-    #인트로 출력
+    # 인트로 출력
     print('\n🎶공~산당 공산당 공~산당 공산당!🎶\n')
-    #게임 진행
+    # 게임 진행
     while True:
         try:
-            gsdTarget=input(f'\n{starter}님🙌 누구를 지목하시겠습니까?: ')
+            gsdTarget = input(f'\n{starter}님🙌 누구를 지목하시겠습니까?: ')
             if gsdTarget not in players:
                 raise TargetError
         except TargetError as e:
@@ -202,19 +215,22 @@ def game04(players,starter):
         else:
             while True:
                 try:
-                    gsdOrder=int(input('\n0: \'동무~😊\' 1: \'마시라우!☠️\' \n과연.. 당신의 선택은?: '))
+                    gsdOrder = int(
+                        input('\n0: \'동무~😊\' 1: \'마시라우!☠️\' \n과연.. 당신의 선택은?: '))
 
-                    if gsdOrder ==0:
-                        starter=players[players.index(gsdTarget)]
+                    if gsdOrder == 0:
+                        starter = players[players.index(gsdTarget)]
                         break
-                    elif gsdOrder==1:
-                        loser=players[players.index(gsdTarget)]
+                    elif gsdOrder == 1:
+                        loser = players[players.index(gsdTarget)]
                         printEndMsg(loser)
                         return loser
                     else:
                         raise OrderError
                 except OrderError as e:
                     print(e)
+
+
 class User:
     def __init__(self, name, tolerance, glasses=0):  # 이름과 주량, 마신 잔
         self.name = name
@@ -237,12 +253,11 @@ def make_users_name(users):
     users_name = []
     for user in users:
         users_name.append(user.name)
-    print(users_name)
     return users_name
 
 
 def game_start(game_starter, users_names):
-    games = ['더 게임 오브 데스','369 게임','지하철 게임','공산당 게임']
+    games = ['더 게임 오브 데스', '369 게임', '지하철 게임', '공산당 게임']
     print('오늘의 Alcohol GAME')
     for i, game in enumerate(games):
         print(f'{i+1}. {game}')
@@ -251,11 +266,11 @@ def game_start(game_starter, users_names):
     if curr_game_index == 1:
         curr_game_loser = game01(users_names, game_starter)
     elif curr_game_index == 2:
-        curr_game_loser = game02(curr_player, users)
+        curr_game_loser = game02(users_names, game_starter)
     elif curr_game_index == 3:
         curr_game_loser = game03(users_names, game_starter)
-    elif curr_game_index==4:
-        curr_game_loser=game04(users_names, game_starter)
+    elif curr_game_index == 4:
+        curr_game_loser = game04(users_names, game_starter)
     return curr_game_loser
 
 
@@ -300,11 +315,13 @@ def crawling():
         'txtFilter': '',
     }
     data = '{"pageNo":"1","pageSize":"10","browser1":"chrome","version":"108","dummy":"A154409760"}'
-    response = requests.post('https://data.seoul.go.kr/dataList/dataView.do', params=params, cookies=cookies, headers=headers, data=data)
+    response = requests.post('https://data.seoul.go.kr/dataList/dataView.do',
+                             params=params, cookies=cookies, headers=headers, data=data)
     new_str = response.text[87:-6]
     new_str = new_str.split(',')
     list_subway = [[] for i in range(14)]
-    list_line = ['경의선', '01호선', '02호선', '03호선', '04호선', '05호선', '06호선', '07호선', '08호선', '09호선', '경춘선', '수인분당선', '공항철도', '신분당선']
+    list_line = ['경의선', '01호선', '02호선', '03호선', '04호선', '05호선',
+                 '06호선', '07호선', '08호선', '09호선', '경춘선', '수인분당선', '공항철도', '신분당선']
     # 크롤링 데이터를 list_subway에 저장하기
     for i in range(len(new_str)):
         if new_str[i][:10] == 'STATION_NM':
@@ -338,35 +355,37 @@ while True:
 
         while True:
             try:
-                num_input = int(input('당신의 주량은 얼마만큼인가요? (1~5중 하나를 선택해주세요) : '))
-                if not(isinstance(num_input, int)):
+                num_input = input('당신의 주량은 얼마만큼인가요? (1~5중 하나를 선택해주세요) : ')
+                if not num_input.isdigit():
                     raise TypeError('정수를 입력해주세요')
-                if not(1 <= num_input <= 5):
+                num_input = int(num_input)
+                if not (1 <= num_input <= 5):
                     raise ValueError('정수 범위 확인!!!')
-                else:
-                    break
             except TypeError as e:
                 print(e)
             except ValueError as e:
                 print(e)
+            else:
+                break
         user_tolerance = tolerance[num_input]
 
         # 사용자와 주량 users에 추가
         users.append(User(user_name, user_tolerance))
         while True:
             try:
-                fnumber = int(
-                    input('함께 취할 친구들은 얼마나 필요하신가요? (3명까지 초대할 수 있어요!) : '))
-                if not(isinstance(fnumber, int)):
+                fnumber = input('함께 취할 친구들은 얼마나 필요하신가요? (3명까지 초대할 수 있어요!) : ')
+                if not fnumber.isdigit():
                     raise TypeError('정수를 입력해주세요')
-                if not(1 <= fnumber <= 3):
+                fnumber = int(fnumber)
+                if not (1 <= fnumber <= 3):
                     raise ValueError('정수 범위 확인!!!')
-                else:
-                    break
+
             except TypeError as e:
                 print(e)
             except ValueError as e:
                 print(e)
+            else:
+                break
 
         # 친구와 주량 생성 후 users에 추가
         rlist = [0]  # 유저 중복 방지를 위한 리스트
