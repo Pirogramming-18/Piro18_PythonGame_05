@@ -145,14 +145,13 @@ def game03(players, starter):
             else:
                 new_list.append(subway_station_name)
                 count+=1
-        print('지식은 생명! 지식은 생명!')
-        print('생명! 생명! 생명생명생명!')
         index_starter = players.index(starter)
         count = count + index_starter
         count = count % len(players)
-        # return된 값으로 술마시고 다음 게임을 진행할 사람을 정한다
-        # count가 0이면 같은 사람이 다음 게임 시작
-        # count가 1이면 리스트에 저장된 순서의 다음 사람이 게임 시작
+        print("땡!")
+        print(players[count], "님이 졌습니다.")
+        print('지식은 생명! 지식은 생명!')
+        print('생명! 생명! 생명생명생명!\n')
         return players[count]
 
 # 공산당 게임
