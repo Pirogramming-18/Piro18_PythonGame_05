@@ -41,9 +41,7 @@ def game01(players, starter):
     return target
 
 # 369 게임
-
-
-def game02(curr_player, users):
+def game02(players, starter):
     print("""
  ____    _    __  ____   ___   _ _  ______ _   _    ____    _    __  __ _____ 
 / ___|  / \  |  \/  \ \ / / | | | |/ / ___| | | |  / ___|  / \  |  \/  | ____|
@@ -272,7 +270,6 @@ def game_start(game_starter, users_names):
     elif curr_game_index == 4:
         curr_game_loser = game04(users_names, game_starter)
     return curr_game_loser
-
 
 # 웹크롤링
 def crawling():
