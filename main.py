@@ -288,7 +288,6 @@ def game04(players, starter):
                     print(e)
 
 # main
-
 class User:
     def __init__(self, name, tolerance, glasses=0):  # 이름과 주량, 마신 잔
         self.name = name
