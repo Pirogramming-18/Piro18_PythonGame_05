@@ -2,7 +2,7 @@ import random
 import sys
 import requests
 
-# 게임 실행을 위해 추가로 작성한 클래스 및 함수
+# 게임 실행을 위해 추가로 작성한 클래스 및 함수입니다
 # Games04 공산당 게임 실행을 위해 추가로 작성한 Class 및 함수입니다
 class TargetError(Exception):
     def __init__(self):
