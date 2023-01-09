@@ -69,7 +69,6 @@ def game02(players, starter):
             if answer != correct:
                 print("땡!")
                 print("당신이 졌습니다. 술이 들어간다 쭉쭉쭉 쭉쭉! 쭉쭉쭉 쭉쭉!\n")
-                users[order_num].glasses += 1
                 break
         else:
 
@@ -99,7 +98,6 @@ def game02(players, starter):
                 print("땡!")
                 print(users[order_num].name,
                       "님이 졌습니다. 술이 들어간다 쭉쭉쭉 쭉쭉! 쭉쭉쭉 쭉쭉!\n")
-                users[order_num].glasses += 1
                 break
 
         print("\n")
